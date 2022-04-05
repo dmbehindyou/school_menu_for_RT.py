@@ -21,7 +21,6 @@ async def get_menu(message: types.Message):
             r = requests.get("https://edu.tatar.ru/n_chelny/lic-int79/food")
             soup = BS(r.content, 'html.parser')
             name = soup.find('div', id='school_data').find('a').get('href')
-            #title = html.select(".crumbs -> .sp_block -> a")
             await message.reply('https://edu.tatar.ru' + name)
     except:
         await message.reply("Я вас не понимаю, попробуйте ещё раз.")
