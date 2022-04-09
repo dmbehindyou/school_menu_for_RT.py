@@ -40,7 +40,6 @@ def get_school(id_users):
 
 
 def check_users(id_users):
-    users = []
     Users_in = False
     con = _sqlite3.connect('eaten_RT.db')
     cur = con.cursor()
@@ -48,10 +47,10 @@ def check_users(id_users):
         f"SELECT users_id FROM users").fetchall()
     cur.close()
     for elem in inf:
-        id, *k = elem
-        users.append(id)
-    if id_users in users:
-        Users_in = True
+        id, = elem
+        if str(id_users).strip() == str(id).strip():
+            Users_in = True
+
     return Users_in
 
 
@@ -62,6 +61,3 @@ def write_menu_date_update(school_name, menu, date_update):
     cur.execute("""UPDATE n_chelny SET data_obnovlenia = ? WHERE schools = ?""", (date_update, school_name))
     con.commit()
     cur.close()
-
-
-

@@ -9,7 +9,7 @@ import change_xlsx
 import datetime
 from readd_db import read_db, write_school, clear_db_users, get_school, check_users, write_menu_date_update
 
-bot = Bot(token=tg_bot_token_Airat)  # to_db
+bot = Bot(token=tg_bot_token_Nail)  # to_db
 dp = Dispatcher(bot)
 
 
@@ -40,7 +40,7 @@ async def get_menu(message: types.Message):
                 try:
                     await bot.send_message(message.from_user.id, "Пожалуйста, подождите")
                     change_xlsx.give_menu(link + str(datetime.date.today()) + '-sm.xlsx')
-                    print_menu('menu.xlsx')
+                    write_menu_date_update(sch_full_name, change_xlsx.print_menu('menu.xlsx'), datetime.date.today())
                 except:
                     await bot.send_message(message.from_user.id, "Вашего меню ещё нет...")
         elif message.text == 'Получить меню':
