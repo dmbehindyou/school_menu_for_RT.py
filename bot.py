@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup as BS
-from config import tg_bot_token_Nail, admins
+from config import tg_bot_token_Airat, admins
 import markups as nav
 from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
@@ -8,7 +8,7 @@ from aiogram.utils import executor
 import change_xlsx
 import datetime
 
-bot = Bot(token=tg_bot_token_Nail)
+bot = Bot(token=tg_bot_token_Airat)
 dp = Dispatcher(bot)
 
 
@@ -30,6 +30,7 @@ async def support_team(message: types.Message):
 @dp.message_handler()
 async def get_menu(message: types.Message):
     try:
+
         if message.text == 'Получить меню' and True:
             # change when connecting db person-school
             # change when connecting the db with area-schools
