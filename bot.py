@@ -1,12 +1,13 @@
 import requests
 from bs4 import BeautifulSoup as BS
-from config import tg_bot_token_Airat, admins
+from config import tg_bot_token_Airat, admins, tg_bot_token_Nail
 import markups as nav
 from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
 from aiogram.utils import executor
 import change_xlsx
 import datetime
+from readd_db import read_db
 
 bot = Bot(token=tg_bot_token_Airat)  # to_db
 dp = Dispatcher(bot)
