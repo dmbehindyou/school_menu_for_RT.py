@@ -55,4 +55,13 @@ def check_users(id_users):
     return Users_in
 
 
+def write_menu_date_update(school_name, menu, date_update):
+    con = _sqlite3.connect('eaten_RT.db')
+    cur = con.cursor()
+    cur.execute("""UPDATE n_chelny SET menu = ? WHERE schools = ?""", (menu, school_name))
+    cur.execute("""UPDATE n_chelny SET data_obnovlenia = ? WHERE schools = ?""", (date_update, school_name))
+    con.commit()
+    cur.close()
+
+
 

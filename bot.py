@@ -7,7 +7,7 @@ from aiogram.dispatcher import Dispatcher
 from aiogram.utils import executor
 import change_xlsx
 import datetime
-from readd_db import read_db, write_school, clear_db_users, get_school, check_users
+from readd_db import read_db, write_school, clear_db_users, get_school, check_users, write_menu_date_update
 
 bot = Bot(token=tg_bot_token_Airat)  # to_db
 dp = Dispatcher(bot)
@@ -85,4 +85,4 @@ async def gym26(message: types.Message):
 
 
 if __name__ == '__main__':
-    executor.start_polling(dp) # ее моее
+    executor.start_polling(dp)
