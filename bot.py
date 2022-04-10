@@ -32,24 +32,16 @@ async def support_team(message: types.Message):
 @dp.message_handler()
 async def get_menu(message: types.Message):
     try:
-
         if message.text == 'Получить меню' and check_users(message.from_user.id):
-            sch_full_name, data_obnovlenia, menu, papka = read_db(get_school(message.from_user.id), 'n_chelny')
-            # change when connecting db person-school
-            # change when connecting the db with area-schools
-            r = requests.get("https://edu.tatar.ru/n_chelny/lic-int79/food")
-            soup = BS(r.content, 'html.parser')
-            # name = 'https://edu.tatar.ru' + soup.find('div', id='school_data').find('a').get('href')
-            # await message.reply(ad.print_menu(name))
-            if datetime.date.today() in data_obnovlenia:  # in db
-                change_xlsx.give_menu('https://edu.tatar.ru' + soup.find('div', id='school_data').find('a').get('href'))
-                await bot.send_message(message.from_user.id, change_xlsx.print_menu('menu.xlsx'))
+            sch_full_name, data_update, menu, link = read_db(get_school(message.from_user.id), 'n_chelny')
+            if datetime.date.today() == data_update:
+                await bot.send_message(message.from_user.id, menu)
             else:
                 await bot.send_message(message.from_user.id, "Пожалуйста, подождите")
-                #read_db(message.)
-                #
-                # await bot.send_message(message.from_user.id, f"{give_menu()}")
-                # load menu into db
+                change_xlsx.give_menu(link + str(datetime.date.today()) + '-sm.xlsx')
+                print_menu('menu.xlsx')
+        elif message.text == 'Получить меню':
+            await bot.send_message(message.from_user.id, "Пожалуйста, выберите школу", reply_markup=nav.inlineMenu)
         elif message.text == 'Изменить школу':
             clear_db_users(message.from_user.id)
             await bot.send_message(message.from_user.id, "Вы перешли в главное меню", reply_markup=nav.inlineMenu)
