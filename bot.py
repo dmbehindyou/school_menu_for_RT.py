@@ -8,7 +8,7 @@ from aiogram.utils import executor
 import change_xlsx
 import datetime
 
-bot = Bot(token=tg_bot_token_Airat)
+bot = Bot(token=tg_bot_token_Airat)  # to_db
 dp = Dispatcher(bot)
 
 
@@ -16,7 +16,8 @@ dp = Dispatcher(bot)
 async def start_command(message: types.Message):
     # add a person to the DB if he is not there
     # await bot.edit_message_reply_markup(chat_id=message.from_user.id, reply_markup=nav.defaultMenu)
-    await bot.send_message(message.from_user.id, "Выберите район и школу, и я отправлю вам школьное меню на сегодня.", reply_markup=nav.inlineMenu)
+    await bot.send_message(message.from_user.id, "Выберите район и школу, и я отправлю вам школьное меню на сегодня.",
+                           reply_markup=nav.inlineMenu)
 
 
 @dp.message_handler(commands=["support"])
@@ -61,7 +62,8 @@ async def n_chelny(message: types.Message):
 
 @dp.callback_query_handler(text="btn_lic_int79")
 async def lic_int79(message: types.Message):
-    await bot.send_message(message.from_user.id, "Спасибо, теперь вы ...какие-то инструкции...", reply_markup=nav.minorMenu)
+    await bot.send_message(message.from_user.id, "Спасибо, теперь вы ...какие-то инструкции...",
+                           reply_markup=nav.minorMenu)
 
 
 if __name__ == '__main__':
