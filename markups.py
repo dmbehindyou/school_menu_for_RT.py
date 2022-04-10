@@ -14,4 +14,6 @@ btn_n_chelny = InlineKeyboardButton(text="г. Набережные Челны", 
 inlineMenu = InlineKeyboardMarkup(row_width=2).insert(btn_n_chelny)
 
 btn_lic_int79 = InlineKeyboardButton(text="Лицей-интернат №79", callback_data="btn_lic_int79")
-inlineMinorMenu = InlineKeyboardMarkup(row_width=2).insert(btn_lic_int79)
+btn_sch78 = InlineKeyboardButton(text="Лицей №78", callback_data="btn_sch78")
+btn_gym26 = InlineKeyboardButton(text="Гимназия №26", callback_data="btn_gym26")
+inlineMinorMenu = InlineKeyboardMarkup(row_width=2).add(btn_lic_int79, btn_sch78, btn_gym26)

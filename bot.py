@@ -7,9 +7,9 @@ from aiogram.dispatcher import Dispatcher
 from aiogram.utils import executor
 import change_xlsx
 import datetime
-from readd_db import read_db
+from readd_db import read_db, write_school, clear_db_users
 
-bot = Bot(token=tg_bot_token_Airat)  # to_db
+bot = Bot(token=tg_bot_token_Nail)  # to_db
 dp = Dispatcher(bot)
 
 
@@ -48,6 +48,7 @@ async def get_menu(message: types.Message):
                 # await bot.send_message(message.from_user.id, f"{give_menu()}")
                 # load menu into db
         elif message.text == 'Изменить школу':
+            clear_db_users(message.from_user.id)
             await bot.send_message(message.from_user.id, "Вы перешли в главное меню", reply_markup=nav.inlineMenu)
         else:
             # change when connecting db person-school
@@ -63,7 +64,25 @@ async def n_chelny(message: types.Message):
 
 @dp.callback_query_handler(text="btn_lic_int79")
 async def lic_int79(message: types.Message):
-    await bot.send_message(message.from_user.id, "Спасибо, теперь вы ...какие-то инструкции...",
+    write_school(message.from_user.id, "Лицей-интернат №79")
+    await bot.send_message(message.from_user.id, "Спасибо, теперь, если ваша школа опубликовала"
+                                                 " меню на сайте edu.tatar, то вы можете его получить.",
+                           reply_markup=nav.minorMenu)
+
+
+@dp.callback_query_handler(text="btn_sch78")
+async def sch78(message: types.Message):
+    write_school(message.from_user.id, "Лицей №78")
+    await bot.send_message(message.from_user.id, "Спасибо, теперь, если ваша школа опубликовала"
+                                                 " меню на сайте edu.tatar, то вы можете его получить.",
+                           reply_markup=nav.minorMenu)
+
+
+@dp.callback_query_handler(text="btn_gym26")
+async def gym26(message: types.Message):
+    write_school(message.from_user.id, "Гимназия №26")
+    await bot.send_message(message.from_user.id, "Спасибо, теперь, если ваша школа опубликовала"
+                                                 " меню на сайте edu.tatar, то вы можете его получить.",
                            reply_markup=nav.minorMenu)
 
 
