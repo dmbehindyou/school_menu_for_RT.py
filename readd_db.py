@@ -28,3 +28,31 @@ def clear_db_users(id_users):
     cur.execute("""DELETE FROM users WHERE users_id = ? ;""", (id_users,))
     con.commit()
     cur.close()
+
+
+def get_school(id_users):
+    con = _sqlite3.connect('eaten_RT.db')
+    cur = con.cursor()
+    school_name, *k = cur.execute(
+        f"SELECT users_school FROM users WHERE users_id = {id_users}").fetchall()[0]
+    cur.close()
+    return school_name
+
+
+def check_users(id_users):
+    users = []
+    Users_in = False
+    con = _sqlite3.connect('eaten_RT.db')
+    cur = con.cursor()
+    inf = cur.execute(
+        f"SELECT users_id FROM users").fetchall()
+    cur.close()
+    for elem in inf:
+        id, *k = elem
+        users.append(id)
+    if id_users in users:
+        Users_in = True
+    return Users_in
+
+
+
