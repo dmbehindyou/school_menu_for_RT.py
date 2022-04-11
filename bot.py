@@ -40,10 +40,12 @@ async def get_menu(message: types.Message):
                 try:
                     await bot.send_message(message.from_user.id, "Пожалуйста, подождите")
                     change_xlsx.give_menu(link + str(datetime.date.today()).strip() + '-sm.xlsx')
-                    write_menu_date_update(sch_full_name, change_xlsx.print_menu('menu.xlsx'), datetime.date.today())
+                    try:
+                        write_menu_date_update(sch_full_name, change_xlsx.print_menu('menu.xlsx'), datetime.date.today())
+                    except:
+                        await bot.send_message(message.from_user.id, "Со мной, функцией write_menu_date_update проблемы")
                 except:
                     await bot.send_message(message.from_user.id, "Вашего меню ещё нет...")
-                    await bot.send_message(message.from_user.id, link + str(datetime.date.today()).strip() + '-sm.xlsx')
         elif message.text == 'Получить меню':
             await bot.send_message(message.from_user.id, "Пожалуйста, выберите школу", reply_markup=nav.inlineMenu)
         elif message.text == 'Изменить школу':
