@@ -7,15 +7,17 @@ def print_menu(book):
     sheet = book.sheet_by_index(0)
     priem_pishi, menu = [], ''
     ne_school = True
+    problems = [42, '', None]
     try:
         for i in range(4, 25):
             if sheet.cell_value(i - 1, 0) == "Школа":
                 ne_school = False
             if ne_school:
-                if sheet.cell_value(i - 1, 0) != 42:
+                if sheet.cell_value(i - 1, 0) not in problems:
                     priem_pishi.append(sheet.cell_value(i - 1, 0))
     except IndexError:
         pass
+    print(priem_pishi)
     i = 3
     for elem in priem_pishi:
         chto_dayt = ''
@@ -30,7 +32,7 @@ def print_menu(book):
             try:
                 if i < 4:
                     i += 1
-                while sheet.cell_value(i + 1, 3) != 42 and sheet.cell_value(i + 1, 0) != 'Школа':
+                while sheet.cell_value(i + 1, 3) not in problems and sheet.cell_value(i + 1, 0) != 'Школа':
                     chto_dayt += f'{sheet.cell_value(i, 3)} ({int(sheet.cell_value(i, 4))} гр.)\n'
                     i += 1
                 chto_dayt += f'{sheet.cell_value(i, 3)} ({int(sheet.cell_value(i, 4))} гр.)\n'
