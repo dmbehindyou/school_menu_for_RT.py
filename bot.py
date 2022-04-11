@@ -34,15 +34,16 @@ async def get_menu(message: types.Message):
     try:
         if message.text == 'Получить меню' and check_users(message.from_user.id):
             sch_full_name, data_update, menu, link = read_db(get_school(message.from_user.id), 'n_chelny')
-            if datetime.date.today() == data_update:
+            if str(datetime.date.today()) == data_update:
                 await bot.send_message(message.from_user.id, menu)
             else:
                 try:
                     await bot.send_message(message.from_user.id, "Пожалуйста, подождите")
-                    change_xlsx.give_menu(link + str(datetime.date.today()) + '-sm.xlsx')
+                    change_xlsx.give_menu(link + str(datetime.date.today()).strip() + '-sm.xlsx')
                     write_menu_date_update(sch_full_name, change_xlsx.print_menu('menu.xlsx'), datetime.date.today())
                 except:
                     await bot.send_message(message.from_user.id, "Вашего меню ещё нет...")
+                    await bot.send_message(message.from_user.id, link + str(datetime.date.today()).strip() + '-sm.xlsx')
         elif message.text == 'Получить меню':
             await bot.send_message(message.from_user.id, "Пожалуйста, выберите школу", reply_markup=nav.inlineMenu)
         elif message.text == 'Изменить школу':
